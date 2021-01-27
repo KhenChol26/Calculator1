@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 public class main {
@@ -118,11 +119,11 @@ public class main {
                              * значением из массива Arab*/
                             if (Rome[i].equals(romeNumber.substring(0,
                                     Rome[i].length()))) {
-                            /* После чего прибавляем число соответствующее
-                             индексу элемента римской цифры из массива Arab*/
+                        /* После чего прибавляем число соответствующее
+                         индексу элемента римской цифры из массива Arab*/
                                 arabNumber += Arab[i];
                                 // и удаляем из строки римскую цифру
-                                romeNumber.delete(0, Rome[i].length());
+                               romeNumber.delete(0, Rome[i].length());
                                 if (romeNumber.length() == 0)
                                     return arabNumber;
                             } else
@@ -136,5 +137,44 @@ public class main {
             return 0;
         }
     }
+    static class RomanToArabic {
+        static int[] Arab = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        static String[] Rome = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
+        public Serializable ArabictoRoman(String arab) {
+
+            StringBuilder arabNumber = new StringBuilder(arab);
+            String romeNumber = String.valueOf(0);
+            int i = 0;
+            // Проверяем переданную строку на наличие символов
+            if (arabNumber.length() > 0) {
+                while (true) {
+                    do {
+                        if (Arab[i].length() <= arabNumber.length()) {
+                            /* Выделяем из строки подстроку и сравниваем со
+                             * значением из массива Rome*/
+                            if (Arab[i].equals(arabNumber.substring(0,
+                                    Arab[i].length()))) {
+                        /* После чего прибавляем число соответствующее
+                         индексу элемента арабской цифры из массива Rome*/
+                                romeNumber += Rome[i];
+                                // и удаляем из строки арабскую цифру
+                                arabNumber.delete(0, Arab[i].length());
+                                if (arabNumber.length() == 0)
+                                    return romeNumber;
+                            } else
+                                break;
+                        } else {
+                            break;
+                        }
+                    } while (arabNumber.length() != 0);
+                    i++;
+                }
+            }
+            return 0;
+        }
+
+        public int arabicToRoman(String block) {
+        }
+    }
 }
